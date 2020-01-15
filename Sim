@@ -1,0 +1,62 @@
+import random
+
+print("Добро пожаловать в игру Сим!")
+print("Напишите: 'Правила', чтобы ознакомиться с правилами, или 'Играть', чтобы начать игру.")
+start_game = False
+while start_game is not True:
+    command = input()
+    if command == "Правила":
+        print("Правила таковы: Есть кучка камней, играют двое, начинает первый")
+        print("В свой ход каждый игрок по очереди берет 1, 2 или 3 камня. Взявший последний камень проигрывает.")
+        command = 0
+    elif command != "Играть" and command != 0:
+        print("Неверная команда!")
+        command = 0
+    elif command == 0:
+        continue
+    else:
+        start_game = True
+        command = 0
+print("Игра начинается!")
+another_game = True
+while another_game == True:
+    print("Выберите начальное число камней (число в диапазоне от 4 до 9999999999)")
+    N = int(input())
+    print("Вы ходите первым, введите количество камней которое вы возьмете.")
+    win = "a"
+    while win != "b":
+        move = int(input())
+        if move>3 or move<1:
+            print("Ход в пределах от одного до трех!")
+        else:
+            N = N - move
+            print("Камней осталось:", N)
+            if (N == 0):
+                print("Вы проиграли.")
+                win = "b"
+            elif (N == 1):
+                print("Вы победили!")
+                win = "b"
+            else:
+                if (N % 4 != 0):
+                    m1 = 4 - move
+                elif N == 2:
+                    m1 = random.randint(1, 2)
+                else:
+                    m1 = random.randint(1, 3)
+                print("Ход бота -", m1)
+                N = N - m1
+                if (N == 0):
+                    print("Вы победили!")
+                    win = "b"
+                elif (N == 1):
+                    print("Вы проиграли.")
+                    win = "b"
+                else:
+                    print("Камней осталось:", N)
+    print("Сыграем еще? ('Да' или 'Нет')")
+    answer = input()
+    if (answer == "Да"):
+        continue
+    else:
+        break
